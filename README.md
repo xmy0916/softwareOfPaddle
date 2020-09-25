@@ -1,1 +1,10 @@
 # softwareOfPaddle
+## 文件简介
+- paddleseg文件夹：里面包含paddleseg的模型以及paddleseg初始化配置的文件
+- utils文件夹：放一些用得上的工具代码
+- config.txt：用户使用会保存配置到本地的txt
+- main.py：继承了UI类，将UI和函数分开，UI界面按钮事件等处理复杂事务的逻辑函数比如打开Gige相机等跟界面关系不大的都在这个文件。
+- mainUI.py:界面的UI文件，定义按钮编辑框标签等，一些简单的逻辑函数会在里面例如最小化窗口等这样的纯跟界面有关的函数。
+- openCameraThread：处理打开相机的文件，需要已经完成本地相机的打开，USB相机的打开，缺少Gige相机的打开
+- paddledetectionThread:在里面实现目标检测函数（未完成）
+- paddlesegThread:在里面实现图像分割函数（大部分完成）
