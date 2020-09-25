@@ -1,0 +1,4 @@
+0
+0
+D:/self_driver/softwareOfPaddleDetection/paddleseg/model/2
+400 200
