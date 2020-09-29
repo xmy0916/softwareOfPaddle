@@ -2,7 +2,6 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog,QMessageBox
 import mainUI
 from openCameraThread import OpenCameraThread
-from paddledetectionThread import DetectionThread
 import cv2
 from PyQt5 import QtGui
 from PyQt5.QtGui import *
@@ -24,6 +23,7 @@ class MainCode(QMainWindow, mainUI.MainUi):
         self.sourceImage_label.setText("加载视屏中......")
         with open("./connfig.txt","r") as config:
             mode = int(config.readline())
+            print(mode)
             self.openCameraThread = OpenCameraThread(0,mode, self.sourceImage_label,self.resultImage_label,self.showImg)
 
 
@@ -31,6 +31,7 @@ class MainCode(QMainWindow, mainUI.MainUi):
         self.sourceImage_label.setText("加载视屏中......")
         with open("./connfig.txt","r") as config:
             mode = int(config.readline())
+            print(mode)
             self.openCameraThread = OpenCameraThread(1,mode, self.sourceImage_label,self.resultImage_label,self.showImg)
 
 
@@ -38,6 +39,7 @@ class MainCode(QMainWindow, mainUI.MainUi):
         self.sourceImage_label.setText("加载视屏中......")
         with open("./connfig.txt", "r") as config:
             mode = int(config.readline())
+            print(mode)
             self.openCameraThread = OpenCameraThread(2, mode, self.sourceImage_label, self.resultImage_label,
                                                      self.showImg)
 

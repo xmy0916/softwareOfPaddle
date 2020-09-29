@@ -1,7 +1,4 @@
 import threading
-from PyQt5 import QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
 import cv2
 from paddledetectionThread import DetectionThread
 from paddlesegThread import SegThread
@@ -21,15 +18,17 @@ class OpenCameraThread(object):
         self.srcLabel = srcLabel
         self.dstLabel = dstLabel
         self.showImg = showImg
-        self.detect = DetectionThread()
-        self.seg = SegThread()
         self.cameraThread = threading.Thread(target=self.openCameraThread)
-        self.segThread = threading.Thread(target=self.segPredectThread)
-        self.detectThread = threading.Thread(target=self.detectPredictThread)
         self.cameraThread.start()
         if self.mode == 0:
+            print("seg")
+            self.seg = SegThread()
+            self.segThread = threading.Thread(target=self.segPredectThread)
             self.segThread.start()
         elif self.mode == 1:
+            print("detection")
+            self.detect = DetectionThread()
+            self.detectThread = threading.Thread(target=self.detectPredictThread)
             self.detectThread.start()
         print("打开相机初始化成功")
 
@@ -79,8 +78,8 @@ class OpenCameraThread(object):
         while OpenCameraThread.isRunning:
             if OpenCameraThread.image is None:
                 continue
-            segResult = self.detect.detectOnePicture(OpenCameraThread.image)
-            self.showImg(segResult, self.dstLabel)
+            detectionResult = self.detect.detectOnePicture(OpenCameraThread.image)
+            self.showImg(detectionResult, self.dstLabel)
         print("detect进程关闭")
 
 

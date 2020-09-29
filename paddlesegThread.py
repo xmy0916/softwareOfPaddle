@@ -1,7 +1,3 @@
-import threading
-from PyQt5 import QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
 import cv2
 import importlib
 import numpy as np
