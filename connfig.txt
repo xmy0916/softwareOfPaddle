@@ -1,4 +1,4 @@
-1
 0
-D:/self_driver/softwareOfPaddleDetection/paddledetection/models/myFace
-
+1
+D:/self_driver/softwareOfPaddle/paddleseg/models/Road
+1536 576

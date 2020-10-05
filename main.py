@@ -12,19 +12,26 @@ class MainCode(QMainWindow, mainUI.MainUi):
         QMainWindow.__init__(self)
         mainUI.MainUi.__init__(self)
         # 槽函数
-        self.left_button_2.clicked.connect(self.openLocalCameraThread)
+        self.left_button_2.clicked.connect(self.openLocalVedioThread)
         self.left_button_1.clicked.connect(self.openUSBCameraThread)
         self.left_button_3.clicked.connect(self.openGigeCameraThread)
         self.left_close.clicked.connect(self.closeApp)
         self.button_choose_model_dir.clicked.connect(self.getDir)
 
 
-    def openLocalCameraThread(self):
-        self.sourceImage_label.setText("加载视屏中......")
-        with open("./connfig.txt","r") as config:
-            mode = int(config.readline())
-            print(mode)
-            self.openCameraThread = OpenCameraThread(0,mode, self.sourceImage_label,self.resultImage_label,self.showImg)
+    def openLocalVedioThread(self):
+        fname, _ = QFileDialog.getOpenFileName(self, '选择视屏', 'open file', 'Image files(*.mp4 *.mkv *.avi)')
+        if len(fname) != 0:
+            if self.is_chinese(fname):
+                print("有中文")
+                QMessageBox.warning(self, '警告', '暂不支持含有中文的路径')
+                return
+            else:
+                self.sourceImage_label.setText("加载视屏中......")
+                with open("./connfig.txt","r") as config:
+                    mode = int(config.readline())
+                    print(mode)
+                    self.openCameraThread = OpenCameraThread(0,mode, self.sourceImage_label,self.resultImage_label,self.showImg,fname)
 
 
     def openUSBCameraThread(self):

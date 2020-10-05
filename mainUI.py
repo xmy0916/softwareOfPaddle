@@ -45,7 +45,7 @@ class MainUi(object):
 
         self.left_button_1 = QtWidgets.QPushButton(qtawesome.icon('fa.film', color='white'), "usb相机")
         self.left_button_1.setObjectName('left_button')
-        self.left_button_2 = QtWidgets.QPushButton(qtawesome.icon('fa.file-image-o', color='white'), "前置相机")
+        self.left_button_2 = QtWidgets.QPushButton(qtawesome.icon('fa.file-image-o', color='white'), "本地视频")
         self.left_button_2.setObjectName('left_button')
         self.left_button_3 = QtWidgets.QPushButton(qtawesome.icon('fa.picture-o', color='white'), "gige相机")
         self.left_button_3.setObjectName('left_button')

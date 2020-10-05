@@ -7,7 +7,7 @@ from paddlesegThread import SegThread
 class OpenCameraThread(object):
     isRunning = True
     image = None
-    def __init__(self,cameraType,mode,srcLabel,dstLabel,showImg):
+    def __init__(self,cameraType,mode,srcLabel,dstLabel,showImg,vedioPath = ""):
         '''
         :param cameraType:0-本地相机；1-USB协议相机；2-Gige协议相机
         :param srcLabel:原图显示的label
@@ -18,6 +18,7 @@ class OpenCameraThread(object):
         self.srcLabel = srcLabel
         self.dstLabel = dstLabel
         self.showImg = showImg
+        self.vedioPath = vedioPath
         self.cameraThread = threading.Thread(target=self.openCameraThread)
         self.cameraThread.start()
         if self.mode == 0:
@@ -35,13 +36,15 @@ class OpenCameraThread(object):
     def openCameraThread(self):
         # 本地相机
         if self.cameraType == 0:
-            cap = cv2.VideoCapture(0)
-            while OpenCameraThread.isRunning:
+            #cap = cv2.VideoCapture(0)
+            cap = cv2.VideoCapture(self.vedioPath)
+            while cap.isOpened():
                 ret, img = cap.read()
                 if img is None:
                     continue
                 OpenCameraThread.image = img.copy() # OpenCameraThread.image给别的线程处理预测等
                 self.showImg(img,self.srcLabel)
+                cv2.waitKey(50)
             cap.release()
             cv2.destroyAllWindows()
             OpenCameraThread.isRunning = False
